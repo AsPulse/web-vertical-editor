@@ -47,11 +47,21 @@
     <script>
         const height = 20;
         const width = 20;
+        (async () => {
+            const data = (await (await fetch('/load')).json()).data;
+            document.getElementById('input').value = data;
+            draw(data);
+        })();
 
         function input(){
-            draw(document.getElementById('input').value);
+            const value = document.getElementById('input').value;
+            draw(value);
+            const xhr = new XMLHttpRequest();
+
+            xhr.open( 'POST', '/save' );
+            xhr.setRequestHeader( 'content-type', 'application/json;charset=UTF-8' );
+            xhr.send(JSON.stringify({data: value}));
         }
-        draw("");
         function draw(text){
             const content_old = document.getElementById("content");
 
