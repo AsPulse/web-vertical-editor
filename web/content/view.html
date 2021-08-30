@@ -7,14 +7,8 @@
     <title>Web Vertical Editor</title>
 </head>
 <body>
-    <div id="content">
-        <div class="row">
-            <span>あ</span><span>い</span><span>う</span><span>え</span><span>お</span>
-        </div>
-        <div class="row">
-            <span>か</span><span>き</span></span><span>く</span><span>け</span><span>こ</span>
-        </div>
-    </div>
+    <div id="content"></div>
+    <textarea id="input" cols="30" rows="10" oninput="input()"></textarea>
     <style>
         .row{
             display: flex;
@@ -28,6 +22,7 @@
             justify-content: center;
             align-items: center;
             border: 1px gray solid;
+            writing-mode: vertical-rl;
         }
         .row span:not(.row span:last-child){
             border-bottom: none;
@@ -40,5 +35,51 @@
             flex-direction: row-reverse;
         }
     </style>
+    <script>
+        const height = 20;
+        const width = 20;
+
+        function input(){
+            draw(document.getElementById('input').value);
+        }
+        function draw(text){
+            const content_old = document.getElementById("content");
+
+            const content = content_old.cloneNode( false );
+            content_old.parentNode.replaceChild( content , content_old );
+
+            const rows = text
+                .split(/\n/)
+                .flatMap(v => {
+                    if (v.length <= height) return [v];
+                    const letters = v.split('');
+                    let rows = [];
+                    let lookingLetters = [];
+                    letters.forEach(letter => {
+                        lookingLetters.push(letter);
+                        if(lookingLetters.length >= height) {
+                            rows.push(lookingLetters);
+                            lookingLetters = [];
+                        }
+                    });
+                    rows.push(lookingLetters);
+                    return rows.map(v => v.join(""));
+                });
+            rows.forEach(v => {
+                const row = document.createElement("div");
+                row.classList.add("row");
+
+                const letters = v.split('');
+                while (letters.length < height) letters.push('');
+                letters.forEach(e => {
+                    const spanElement = document.createElement("span");
+                    spanElement.textContent = e;
+                    row.appendChild(spanElement);
+                });
+                content.appendChild(row);
+            });
+        }
+        
+    </script>
 </body>
 </html>
