@@ -10,18 +10,26 @@
     <div id="content"></div>
     <textarea id="input" cols="30" rows="10" oninput="input()"></textarea>
     <style>
+        #input{
+            width: calc(100% - 8px);
+            margin-top: 1em;
+            border-radius: 0;
+            outline: none;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
         .row{
             display: flex;
             flex-direction: column;
         }
         .row span{
-            font-size: calc(clamp(100px, 100vh, 800px) / 20 * 0.6);
-            width: calc(clamp(100px, 100vh, 800px) / 20);
-            height: calc(clamp(100px, 100vh, 800px) / 20);
+            font-family: 'M PLUS 1p', sans-serif;
+            font-size: calc(clamp(100px, 50vh, 800px) / 20 * 0.6);
+            width: calc(clamp(100px, 50vh, 800px) / 20);
+            height: calc(clamp(100px, 50vh, 800px) / 20);
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            border: 1px gray solid;
+            border: 1px rgb(180, 180, 180) solid;
             writing-mode: vertical-rl;
         }
         .row span:not(.row span:last-child){
@@ -33,6 +41,7 @@
         #content{
             display: flex;
             flex-direction: row-reverse;
+            overflow-x: scroll;
         }
     </style>
     <script>
@@ -42,6 +51,7 @@
         function input(){
             draw(document.getElementById('input').value);
         }
+        draw("");
         function draw(text){
             const content_old = document.getElementById("content");
 
