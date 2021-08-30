@@ -1,5 +1,5 @@
 'use strict'
-
+require('dotenv').config();
 const fastify = require('fastify')();
 const fs = require('fs').promises;
 
@@ -9,4 +9,4 @@ fastify.get('/', async (_req, reply) => {
     reply.send(buffer);
 });
 
-fastify.listen(8080);
+fastify.listen(process.env.PORT ?? 8080);
