@@ -10,19 +10,22 @@
     <div id="content"></div>
     <textarea id="input" cols="30" rows="10" oninput="input()"></textarea>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
         #input{
+            font-family: 'M PLUS 1p', sans-serif;
             width: calc(100% - 8px);
             margin-top: 1em;
             border-radius: 0;
             outline: none;
+            transform: rotate(0.03deg);
         }
-        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
         .row{
             display: flex;
             flex-direction: column;
         }
         .row span{
             font-family: 'M PLUS 1p', sans-serif;
+            transform: rotate(0.03deg);
             font-size: calc(clamp(100px, 50vh, 800px) / 20 * 0.6);
             width: calc(clamp(100px, 50vh, 800px) / 20);
             height: calc(clamp(100px, 50vh, 800px) / 20);
