@@ -7,6 +7,38 @@
     <title>Web Vertical Editor</title>
 </head>
 <body>
-    <h1>Web Vertical Editor</h1>
+    <div id="content">
+        <div class="row">
+            <span>あ</span><span>い</span><span>う</span><span>え</span><span>お</span>
+        </div>
+        <div class="row">
+            <span>か</span><span>き</span></span><span>く</span><span>け</span><span>こ</span>
+        </div>
+    </div>
+    <style>
+        .row{
+            display: flex;
+            flex-direction: column;
+        }
+        .row span{
+            font-size: calc(clamp(100px, 100vh, 800px) / 20 * 0.6);
+            width: calc(clamp(100px, 100vh, 800px) / 20);
+            height: calc(clamp(100px, 100vh, 800px) / 20);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px gray solid;
+        }
+        .row span:not(.row span:last-child){
+            border-bottom: none;
+        }
+        .row:not(.row:last-child) span{
+            border-left: none;
+        }
+        #content{
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    </style>
 </body>
 </html>
