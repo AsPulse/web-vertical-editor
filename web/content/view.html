@@ -7,10 +7,21 @@
     <title>Web Vertical Editor</title>
 </head>
 <body>
+    <p id="count"></p>
     <div id="content"></div>
     <textarea id="input" cols="30" rows="10" oninput="input()"></textarea>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
+        .rowView {
+            margin-right: 1em;
+        }
+        .small {
+            font-size: 0.7em;
+        }
+        #count{
+            font-family: 'M PLUS 1p', sans-serif;
+            font-size: 2em;
+        }
         #input{
             font-family: 'M PLUS 1p', sans-serif;
             width: calc(100% - 8px);
@@ -105,6 +116,10 @@
                 });
                 content.appendChild(row);
             });
+
+            const count = document.getElementById("count");
+            count.innerHTML = 
+                `${Math.floor(rows.length / width)} <span class="small">page(s)</span> + ${text.length === 0 ? 0 : rows.length % width} <span class="small rowView">row(s)</span> ${text.length} <span class="small">letter(s)</span>`;
         }
         
     </script>
