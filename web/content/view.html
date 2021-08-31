@@ -52,6 +52,11 @@
         .row:not(.row:last-child) span{
             border-left: none;
         }
+        .row span.burasage{
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+        }
         #content{
             display: flex;
             flex-direction: row-reverse;
@@ -100,7 +105,7 @@
                             lookingLetters = [];
                         }
                     });
-                    rows.push(lookingLetters);
+                    lookingLetters.length > 0 && rows.push(lookingLetters);
                     return rows.map(v => v.join(""));
                 });
             rows.forEach(v => {
@@ -109,9 +114,10 @@
 
                 const letters = v.split('');
                 while (letters.length < height) letters.push('');
-                letters.forEach(e => {
+                letters.forEach((e, i) => {
                     const spanElement = document.createElement("span");
                     spanElement.textContent = e;
+                    if(i >= height) spanElement.classList.add('burasage');
                     row.appendChild(spanElement);
                 });
                 content.appendChild(row);
