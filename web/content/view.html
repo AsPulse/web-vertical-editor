@@ -79,6 +79,10 @@
                     let rows = [];
                     let lookingLetters = [];
                     letters.forEach(letter => {
+                        if(lookingLetters.length === 0 && (letter === "、" || letter === "。")) {
+                            rows[rows.length - 1].push(letter);
+                            return;
+                        }
                         lookingLetters.push(letter);
                         if(lookingLetters.length >= height) {
                             rows.push(lookingLetters);
